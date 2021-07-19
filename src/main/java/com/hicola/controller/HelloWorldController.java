@@ -20,8 +20,19 @@ import java.util.List;
 public class HelloWorldController {
     private static final Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
 
-    @Autowired
-    private IHelloWorldService helloWorldService;
+//    @Autowired /**属性注入（Spring4.0之后已不推荐）*/
+    private final IHelloWorldService helloWorldService;
+
+    @Autowired /**构造器注入，如果HelloWorldController强依赖IHelloWorldService，即前者不允许后者为NULL，则推荐，此时属性应用final修饰*/
+    public HelloWorldController(IHelloWorldService helloWorldService) {
+        this.helloWorldService = helloWorldService;
+    }
+
+
+//    @Autowired /**setter方法注入，IHelloWorldService对于HelloWorldController来说是可选的，可有可无的，则推荐*/
+//    public void setHelloWorldService(IHelloWorldService helloWorldService) {
+//        this.helloWorldService = helloWorldService;
+//    }
 
     @PostMapping("/allUsers")
     public List<User> findAllUsers() {
@@ -29,5 +40,8 @@ public class HelloWorldController {
         logger.info("Find users: {}", userList.size());
         return userList;
     }
+
+
+
 
 }

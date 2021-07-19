@@ -17,8 +17,12 @@ import java.util.List;
 @Service
 public class HelloWorldServiceImpl extends ServiceImpl<UserMapper, User> implements IHelloWorldService {
 
+    private final UserMapper userMapper;
+
     @Autowired
-    private UserMapper userMapper;//这里会出现报警提示
+    public HelloWorldServiceImpl(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
 
     @Override
     public List<User> findAllUsers() {

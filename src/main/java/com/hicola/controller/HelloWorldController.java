@@ -36,7 +36,7 @@ public class HelloWorldController {
 
     @PostMapping("/allUsers")
     public List<User> findAllUsers() {
-        List<User> userList = helloWorldService.findAllUsers();
+        List<User> userList = helloWorldService.findAllUsersByInterface();
         logger.info("Find users: {}", userList.size());
         return userList;
     }

@@ -1,5 +1,6 @@
 package com.hicola.model;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
@@ -7,6 +8,7 @@ import lombok.Data;
  * @date 2021/7/16
  */
 @Data
+@TableName("p_user")
 public class User {
     private String fid;
     private String name;

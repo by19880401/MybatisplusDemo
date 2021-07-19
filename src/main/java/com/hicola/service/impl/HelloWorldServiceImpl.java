@@ -1,5 +1,6 @@
 package com.hicola.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hicola.mapper.UserMapper;
 import com.hicola.model.User;
@@ -25,7 +26,14 @@ public class HelloWorldServiceImpl extends ServiceImpl<UserMapper, User> impleme
     }
 
     @Override
-    public List<User> findAllUsers() {
+    public List<User> findAllUsersByMapperXML() {
         return userMapper.findAllUsers();
+    }
+
+    @Override
+    public List<User> findAllUsersByInterface() {
+        QueryWrapper<User> qw = new QueryWrapper<>();
+        qw.isNotNull("book_id");// 这里随便乱定的查询条件
+        return userMapper.selectList(qw);
     }
 }

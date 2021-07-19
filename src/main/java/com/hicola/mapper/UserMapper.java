@@ -9,6 +9,9 @@ import java.util.List;
 
 /**
  * Mapper 接口，直接与UserMapper.xml里的SQL关联了
+ *
+ * 当你的Mapper 继承BaseMapper接口后，无需编写 mapper.xml 文件，即可获得CRUD功能
+ *
  * @author baiyang
  * @date 2021/7/16
  */

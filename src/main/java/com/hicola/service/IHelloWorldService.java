@@ -11,5 +11,15 @@ import java.util.List;
  */
 public interface IHelloWorldService extends IService<User> {
 
-    List<User> findAllUsers();
+    /**
+     * 查询所有人员信息，通过mapper.xml的方式
+     * @return
+     */
+    List<User> findAllUsersByMapperXML();
+
+    /**
+     * 查询所有人员，通过mybatis-plus自带接口
+     * @return
+     */
+    List<User> findAllUsersByInterface();
 }

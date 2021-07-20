@@ -1,5 +1,6 @@
 package com.hicola.model;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -12,6 +13,8 @@ import java.util.Date;
 @Data
 @TableName("p_schedule_import_export_record")
 public class ImportOrExport {
+    @TableId
+    private String fid;
     private String itemName;
     private Date actualStart;
     private Date actualEnd;

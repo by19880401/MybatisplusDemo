@@ -19,11 +19,17 @@ mybatis-plus:
   global-config:
     #逻辑删除配置
     db-config:
-      id-type: assign_uuid
       #删除前
       logic-not-delete-value: 1
       #删除后
       logic-delete-value: 0
+      #id-type取值：(假设我们希望系统中所有表都完全全部都使用某一种主键生成策略，那么可以在 application.properties中添加如下配置全局的；否则，可以在不同实体的ID上配置不同的策略)
+      #auto:数据库ID自增，从1开始；
+      #input:插入前自行设置主键值;
+      #none:使用IdType.NONE策略，表示未设置主键类型;
+      #assign_uuid:排除中划线的UUID,主键类型为String，对应MySQL的表分段为VARCHAR（32）;
+      #ASSIGN_ID（雪花算法）:雪花算法（雪花）是微博开源的分布式ID生成算法其核心思想就是：使用一个64位的长型的数字作为全局唯一ID。在分布式系统中的应用十分广泛，且ID引入了时间戳，基本上保持自增的
+      id-type: assign_uuid
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true

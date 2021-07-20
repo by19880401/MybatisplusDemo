@@ -16,18 +16,4 @@ public class ImportOrExportVo {
     private String websId;
     private String itemId;
     private String question;
-
-    @Override
-    public String toString() {
-        return "ImportOrExportVo{" +
-                "itemName='" + itemName + '\'' +
-                ", startStr='" + startStr + '\'' +
-                ", endStr='" + endStr + '\'' +
-                ", lastMonthEndPlanProgress='" + lastMonthEndPlanProgress + '\'' +
-                ", monthActualProgress='" + monthActualProgress + '\'' +
-                ", websId='" + websId + '\'' +
-                ", itemId='" + itemId + '\'' +
-                ", question='" + question + '\'' +
-                '}';
-    }
 }

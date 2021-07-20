@@ -6,7 +6,6 @@ import cn.hutool.poi.excel.ExcelUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.collect.Lists;
 import com.hicola.mapper.ExcelMapper;
-import com.hicola.mapper.UserMapper;
 import com.hicola.model.ImportOrExport;
 import com.hicola.model.ImportOrExportVo;
 import com.hicola.model.ResponseInfo;
@@ -27,6 +26,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author baiyang
@@ -50,12 +50,15 @@ public class ExcelServiceImpl extends ServiceImpl<ExcelMapper, ImportOrExport> i
 
     private static final String DATE_FORMAT = "yyyy-MM-dd";
 
-    private final UserMapper userMapper;
+    private final ExcelMapper excelMapper;
 
     @Autowired
-    public ExcelServiceImpl(UserMapper userMapper) {
-        this.userMapper = userMapper;
+    public ExcelServiceImpl(ExcelMapper excelMapper) {
+        this.excelMapper = excelMapper;
     }
+
+    @Autowired
+
 
     private static String parseObject(Object obj) {
         if (Objects.isNull(obj)) {
@@ -97,9 +100,21 @@ public class ExcelServiceImpl extends ServiceImpl<ExcelMapper, ImportOrExport> i
             return ResponseInfo.returnErrorMsg();
         }
 
-        // TODO 这里需要继续改造
-        ResponseInfo res = ResponseInfo.returnSuccessMsg();
-        return res;
+        /**List<ImportOrExportVo>转换为List<ImportOrExport>*/
+        List<ImportOrExport> ieList = excelDataList.stream().map(excelObj -> {
+            ImportOrExport ie = new ImportOrExport();
+            ie.setItemId(excelObj.getItemId());
+            ie.setItemName(excelObj.getItemName());
+            ie.setActualStart(DateUtil.parseDate(excelObj.getStartStr()));
+            ie.setActualEnd(DateUtil.parse(excelObj.getEndStr()));
+            ie.setMonthEndProgress(Double.parseDouble(excelObj.getMonthActualProgress()));
+            ie.setWbsId(excelObj.getWebsId());
+            ie.setQuestion(excelObj.getQuestion());
+            return ie;
+        }).collect(Collectors.toList());
+        /**批量保存，默认每次batch的数目为：1000*/
+        this.saveBatch(ieList);
+        return ResponseInfo.returnSuccessMsg();
     }
 
     private boolean isExcelFile(MultipartFile file) {

@@ -2,6 +2,7 @@ package com.hicola.controller;
 
 import com.hicola.model.ResponseInfo;
 import com.hicola.service.IExcelService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Objects;
 
 /**
  * @author baiyang
@@ -35,10 +37,17 @@ public class ExcelController {
         ResponseInfo resObj = new ResponseInfo();
         try {
             resObj = excelService.importData(file, request, response);
-            logger.info("导入成功");
+            if (Objects.isNull(resObj)) {
+                return ResponseInfo.returnErrorMsg();
+            }
+            if (StringUtils.equals(resObj.getErrorCode(), ResponseInfo.SUCCESS_CODE)) {
+                logger.info("导入成功");
+                return ResponseInfo.returnSuccessMsg();
+            }
+            return resObj;
         } catch (Exception e) {
-            logger.warn("导入失败");
+            logger.warn("导入失败", e);
+            return ResponseInfo.returnErrorMsg();
         }
-        return resObj;
     }
 }

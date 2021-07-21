@@ -23,7 +23,8 @@ public class HelloWorldController {
 //    @Autowired /**属性注入（Spring4.0之后已不推荐）*/
     private final IHelloWorldService helloWorldService;
 
-    @Autowired /**构造器注入，如果HelloWorldController强依赖IHelloWorldService，即前者不允许后者为NULL，则推荐，此时属性应用final修饰*/
+    @Autowired
+    /**构造器注入，如果HelloWorldController强依赖IHelloWorldService，即前者不允许后者为NULL，则推荐，此时属性应用final修饰*/
     public HelloWorldController(IHelloWorldService helloWorldService) {
         this.helloWorldService = helloWorldService;
     }

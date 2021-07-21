@@ -38,3 +38,6 @@ mybatis-plus:
 #日志配置
 logging:
   config: classpath:logback.xml
+
+filePath:
+    temp: D:/

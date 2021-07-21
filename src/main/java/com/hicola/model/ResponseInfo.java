@@ -1,7 +1,10 @@
 package com.hicola.model;
 
+import cn.hutool.log.StaticLog;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import lombok.Data;
+
+import java.util.Objects;
 
 /**
  * @author baiyang
@@ -38,5 +41,18 @@ public class ResponseInfo<T> {
             res.setErrorMsg(ERROR_MSG);
         }
         return res;
+    }
+
+    public static ResponseInfo returnDefaultMsg(ResponseInfo res) {
+        if (Objects.isNull(res)) {
+            StaticLog.warn("操作失败");
+            return ResponseInfo.returnErrorMsg();
+        }
+        if (StringUtils.equals(res.getErrorCode(), ResponseInfo.SUCCESS_CODE)) {
+            StaticLog.info("操作成功");
+            return ResponseInfo.returnSuccessMsg();
+        }
+        StaticLog.warn("操作失败");
+        return ResponseInfo.returnErrorMsg();
     }
 }

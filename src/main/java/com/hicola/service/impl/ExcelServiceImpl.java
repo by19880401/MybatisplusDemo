@@ -57,9 +57,6 @@ public class ExcelServiceImpl extends ServiceImpl<ExcelMapper, ImportOrExport> i
         this.excelMapper = excelMapper;
     }
 
-    @Autowired
-
-
     private static String parseObject(Object obj) {
         if (Objects.isNull(obj)) {
             return "";
@@ -108,7 +105,7 @@ public class ExcelServiceImpl extends ServiceImpl<ExcelMapper, ImportOrExport> i
             ie.setActualStart(DateUtil.parseDate(excelObj.getStartStr()));
             ie.setActualEnd(DateUtil.parse(excelObj.getEndStr()));
             ie.setMonthEndProgress(Double.parseDouble(excelObj.getMonthActualProgress()));
-            ie.setWbsId(excelObj.getWebsId());
+            ie.setWbsId(excelObj.getWbsId());
             ie.setQuestion(excelObj.getQuestion());
             return ie;
         }).collect(Collectors.toList());
@@ -151,7 +148,7 @@ public class ExcelServiceImpl extends ServiceImpl<ExcelMapper, ImportOrExport> i
             vo.setEndStr(StringUtils.isBlank(titleEnd) ? "" : titleEnd);
             vo.setLastMonthEndPlanProgress(StringUtils.isBlank(titleNoProgress) ? "" : titleNoProgress);
             vo.setMonthActualProgress(StringUtils.isBlank(titleComProgress) ? "" : titleComProgress);
-            vo.setWebsId(StringUtils.isBlank(titleEntityId) ? "" : titleEntityId);
+            vo.setWbsId(StringUtils.isBlank(titleEntityId) ? "" : titleEntityId);
             vo.setItemId(StringUtils.isBlank(titleItemId) ? "" : titleItemId);
             resultList.add(vo);
         });

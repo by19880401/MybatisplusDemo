@@ -39,7 +39,7 @@ public class ExcelBatchHandleListener extends AnalysisEventListener<ImportOrExpo
         if (ObjectUtils.INSTANCE.isObjAllFieldsNull(excelObj)) {
             throw new ExcelBatchException(ErrorCodeEnum.RECORD_NULL_ERROR);
         }
-        logger.info("==>{}", excelObj);
+        logger.info("打印==>{}", excelObj);
     }
 
     @Override

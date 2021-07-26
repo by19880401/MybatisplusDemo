@@ -36,4 +36,15 @@ public class HelloWorldServiceImpl extends ServiceImpl<UserMapper, User> impleme
         qw.isNotNull("book_id");// 这里随便乱定的查询条件
         return userMapper.selectList(qw);
     }
+
+    @Override
+    public void addUser() {
+        User user = new User();
+        user.setName("QiQi");
+        user.setAge(3);
+        user.setSex("M");
+        user.setAddress("Xi'an Road.3 GaoXinHuaFu XiaoQu");
+        user.setBookId("003");
+        userMapper.insert(user);
+    }
 }

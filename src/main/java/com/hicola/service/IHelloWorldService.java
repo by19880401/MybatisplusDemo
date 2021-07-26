@@ -22,4 +22,9 @@ public interface IHelloWorldService extends IService<User> {
      * @return
      */
     List<User> findAllUsersByInterface();
+
+    /**
+     * 添加一个用户
+     */
+    void addUser();
 }

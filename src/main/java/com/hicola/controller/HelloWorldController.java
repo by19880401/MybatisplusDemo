@@ -42,6 +42,12 @@ public class HelloWorldController {
         return userList;
     }
 
+    @PostMapping("/addUser")
+    public void addUser() {
+        helloWorldService.addUser();
+        logger.info("Add user successfully");
+    }
+
 
 
 

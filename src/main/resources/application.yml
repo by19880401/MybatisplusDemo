@@ -9,7 +9,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/mysql?useSSL=false&serverTimezone=UTC
     username: root
-    password: 123456
+    password: rrsn
     #postgresql-db配置
 #    driver-class-name: org.postgresql.Driver
 #    url: jdbc:postgresql://localhost:5432/postgres

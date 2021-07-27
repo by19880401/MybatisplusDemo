@@ -60,7 +60,7 @@ public class HelloWorldServiceImpl extends ServiceImpl<UserMapper, User> impleme
             User user = new User();
             user.setName("Panda No." + i);
             user.setAge(i);
-            user.setSex("M");
+            user.setSex(i % 2 == 0 ? "F" : "M");//Java取模,奇数为M，偶数为F
             user.setAddress("China Joke" + i);
             user.setBookId("000" + i);
             uList.add(user);

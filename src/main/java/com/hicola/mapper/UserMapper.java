@@ -17,4 +17,6 @@ import java.util.List;
 @Repository // 添加了此注解后，UserMapper注入到*impl类中才不会出现报警提示，目前不知原因为何？
 public interface UserMapper extends BaseMapper<User> {
     List<User> findAllUsers();
+
+    void deleteAllUsers();
 }

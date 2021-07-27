@@ -2,6 +2,7 @@ package com.hicola.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.google.common.collect.Lists;
 import com.hicola.mapper.UserMapper;
 import com.hicola.model.User;
 import com.hicola.service.IHelloWorldService;
@@ -12,6 +13,7 @@ import java.util.List;
 
 /**
  * 服务实现类
+ *
  * @author baiyang
  * @date 2021/7/16
  */
@@ -46,5 +48,24 @@ public class HelloWorldServiceImpl extends ServiceImpl<UserMapper, User> impleme
         user.setAddress("Xi'an Road.3 GaoXinHuaFu XiaoQu");
         user.setBookId("003");
         userMapper.insert(user);
+    }
+
+    @Override
+    public void generateUserData() {
+        //首先删除数据
+        userMapper.deleteAllUsers();
+        // 组装数据
+        List<User> uList = Lists.newArrayList();
+        for (int i = 0; i < 10; i++) {
+            User user = new User();
+            user.setName("Panda No." + i);
+            user.setAge(i);
+            user.setSex("M");
+            user.setAddress("China Joke" + i);
+            user.setBookId("000" + i);
+            uList.add(user);
+        }
+        //批量保存数据
+        this.saveBatch(uList);
     }
 }

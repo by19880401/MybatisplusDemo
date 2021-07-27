@@ -8,4 +8,8 @@
        select * from p_user
     </select>
 
+    <select id="deleteAllUsers" resultType="com.hicola.model.User">
+        delete from p_user
+    </select>
+
 </mapper>

@@ -5,12 +5,12 @@ server:
 #DB配置
 spring:
   datasource:
-    #在家里的配置
+    #mysql-db配置
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/mysql?useSSL=false&serverTimezone=UTC
     username: root
-    password: rrsn
-    #在办公室的配置
+    password: 123456
+    #postgresql-db配置
 #    driver-class-name: org.postgresql.Driver
 #    url: jdbc:postgresql://localhost:5432/postgres
 #    username: postgres

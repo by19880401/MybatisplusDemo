@@ -27,4 +27,9 @@ public interface IHelloWorldService extends IService<User> {
      * 添加一个用户
      */
     void addUser();
+
+    /**
+     * 生成用户数据（用于测试）
+     */
+    void generateUserData();
 }

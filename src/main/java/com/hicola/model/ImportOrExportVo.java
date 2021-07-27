@@ -2,12 +2,14 @@ package com.hicola.model;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;
+import lombok.ToString;
 
 /**
  * @author baiyang
  * @date 2021/7/19
  */
 @Data
+@ToString
 public class ImportOrExportVo {
     @ExcelProperty(value = "任务项名称", index = 0)
     private String itemName;

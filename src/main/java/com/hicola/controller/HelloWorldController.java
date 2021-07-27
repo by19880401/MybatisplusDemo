@@ -1,5 +1,6 @@
 package com.hicola.controller;
 
+import com.hicola.model.ResponseInfo;
 import com.hicola.model.User;
 import com.hicola.service.IHelloWorldService;
 import org.slf4j.Logger;
@@ -46,6 +47,13 @@ public class HelloWorldController {
     public void addUser() {
         helloWorldService.addUser();
         logger.info("Add user successfully");
+    }
+
+    @PostMapping("/generateUsers")
+    public Object generateUserData() {
+        helloWorldService.generateUserData();
+        logger.info("生成数据成功");
+        return ResponseInfo.returnSuccessMsg();
     }
 
 

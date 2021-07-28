@@ -4,6 +4,7 @@ import cn.hutool.log.StaticLog;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -25,6 +26,14 @@ public class ResponseInfo<T> {
         ResponseInfo res = new ResponseInfo();
         res.setErrorCode(SUCCESS_CODE);
         res.setErrorMsg(SUCCESS_MSG);
+        return res;
+    }
+
+    public static ResponseInfo returnSuccessMsg(List records) {
+        ResponseInfo res = new ResponseInfo();
+        res.setErrorCode(SUCCESS_CODE);
+        res.setErrorMsg(SUCCESS_MSG);
+        res.setData(records);
         return res;
     }
 

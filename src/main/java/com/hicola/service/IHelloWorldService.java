@@ -26,10 +26,10 @@ public interface IHelloWorldService extends IService<User> {
     /**
      * 添加一个用户
      */
-    void addUser();
+    void addUser(String name, Integer age, String sex, String address, String bookId);
 
     /**
      * 生成用户数据（用于测试）
      */
-    void generateUserData();
+    void generateUserData(Integer recordNum);
 }

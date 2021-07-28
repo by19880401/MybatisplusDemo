@@ -6,10 +6,14 @@ import com.google.common.collect.Lists;
 import com.hicola.mapper.UserMapper;
 import com.hicola.model.User;
 import com.hicola.service.IHelloWorldService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 服务实现类
@@ -19,6 +23,7 @@ import java.util.List;
  */
 @Service
 public class HelloWorldServiceImpl extends ServiceImpl<UserMapper, User> implements IHelloWorldService {
+    private static final Logger logger = LoggerFactory.getLogger(HelloWorldServiceImpl.class);
 
     private final UserMapper userMapper;
 
@@ -40,23 +45,27 @@ public class HelloWorldServiceImpl extends ServiceImpl<UserMapper, User> impleme
     }
 
     @Override
-    public void addUser() {
+    public void addUser(String name, Integer age, String sex, String address, String bookId) {
         User user = new User();
-        user.setName("QiQi");
-        user.setAge(3);
-        user.setSex("M");
-        user.setAddress("Xi'an Road.3 GaoXinHuaFu XiaoQu");
-        user.setBookId("003");
+        user.setName(name);
+        user.setAge(null == age ? 0 : age);
+        user.setSex(sex);
+        user.setAddress(address);
+        user.setBookId(bookId);
         userMapper.insert(user);
     }
 
     @Override
-    public void generateUserData() {
+    public void generateUserData(Integer recordNum) {
+        if (Objects.isNull(recordNum)) {
+            logger.warn("recordNum is null, set 0 by default");
+            recordNum = 0;
+        }
         //首先删除数据
         userMapper.deleteAllUsers();
         // 组装数据
         List<User> uList = Lists.newArrayList();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < recordNum; i++) {
             User user = new User();
             user.setName("Panda No." + i);
             user.setAge(i);
@@ -65,7 +74,12 @@ public class HelloWorldServiceImpl extends ServiceImpl<UserMapper, User> impleme
             user.setBookId("000" + i);
             uList.add(user);
         }
+        if (CollectionUtils.isEmpty(uList)) {
+            logger.warn("Add {} users.", uList.size());
+            return;
+        }
         //批量保存数据
         this.saveBatch(uList);
+        logger.info("Add {} users.", uList.size());
     }
 }

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -37,22 +38,23 @@ public class HelloWorldController {
 //    }
 
     @PostMapping("/allUsers")
-    public List<User> findAllUsers() {
+    public ResponseInfo findAllUsers() {
         List<User> userList = helloWorldService.findAllUsersByInterface();
         logger.info("Find users: {}", userList.size());
-        return userList;
+        return ResponseInfo.returnSuccessMsg(userList);
     }
 
     @PostMapping("/addUser")
-    public void addUser() {
-        helloWorldService.addUser();
+    public ResponseInfo addUser(@RequestParam("name") String name, @RequestParam("age") Integer age, @RequestParam("sex") String sex, @RequestParam("address") String address, @RequestParam("bookId") String bookId) {
+        helloWorldService.addUser(name, age, sex, address, bookId);
         logger.info("Add user successfully");
+        return ResponseInfo.returnSuccessMsg();
     }
 
-    @PostMapping("/generateUsers")
-    public Object generateUserData() {
-        helloWorldService.generateUserData();
-        logger.info("生成数据成功");
+    @PostMapping(value = "/generateData", produces = "application/json;charset=utf-8")
+    public ResponseInfo generateUserData(@RequestParam("num") Integer recordNum) {
+        helloWorldService.generateUserData(recordNum);
+        logger.info("Generating user data successfully");
         return ResponseInfo.returnSuccessMsg();
     }
 

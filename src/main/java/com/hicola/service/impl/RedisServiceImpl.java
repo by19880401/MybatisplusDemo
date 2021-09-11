@@ -30,9 +30,9 @@ public class RedisServiceImpl implements RedisService {
      * spring  boot  帮我们注入的  redisTemplate  类，泛型里面只能写<String, String>、<Object, Object>
      * 如下：
      */
-//    private final RedisTemplate<String,String> redisTemplate;
+    /*private final RedisTemplate<String,String> redisTemplate;
 
-//    private final RedisTemplate<Object, Object> redisTemplate;
+    private final RedisTemplate<Object, Object> redisTemplate;*/
     @Override
     public void getValue(String key) {
         String value = stringRedisTemplate.opsForValue().get(key);
